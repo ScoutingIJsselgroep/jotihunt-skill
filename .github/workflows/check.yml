@@ -1,0 +1,29 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: SKILL.md frontmatter
+        run: |
+          f=skills/jotihunt-hints/SKILL.md
+          head -1 "$f" | grep -qx -- '---'
+          grep -q '^name: jotihunt-hints$' "$f"
+          grep -q '^description: ' "$f"
+      - name: jh.py smoke test
+        working-directory: skills/jotihunt-hints
+        run: |
+          python3 scripts/jh.py --help > /dev/null
+          python3 scripts/jh.py rd2wgs 1883 4407 | grep -q '51.95'
+          python3 scripts/jh.py wgs2rd 51.953742 5.871622 | grep -q '1883'
+          python3 scripts/jh.py letterwaarde ABC | grep -q '6'
+          python3 scripts/jh.py caesar "Hs hr snkc zlnmf sgd vhrd" > /dev/null
+          python3 -c "import json; json.load(open('scripts/toollinks.json'))"

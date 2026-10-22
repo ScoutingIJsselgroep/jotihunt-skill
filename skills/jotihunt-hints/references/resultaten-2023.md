@@ -1,11 +1,13 @@
 # Blinde test van de coach op editie 2023 (Pirates of the Caribbean)
 
+> **Let op: dit is de beoordeling van de AI zelf, niet de officiële score.** Antwoorden die hier goed heten, zijn achteraf als geloofwaardig bestempeld en niet allemaal echt goed. Ter vergelijking: in 2026 haalde ons team 128 punten voor de hints, terwijl de AI-evaluatie van dat jaar op 154 goede teamantwoorden uitkomt.
+
 Op 19 oktober 2026 is het volledige systeem (solver met `claude -p`, model Opus, skill zoals na de 2026-analyse) losgelaten op de hints van 2023. Het systeem had die hints nooit gezien: de skill bevat alleen 2024, 2025 en 2026.
 
 ## Opzet
 
 - **Bron:** de feedpagina's van jotihunt.nl, gearchiveerd in de Wayback Machine op 21–25 oktober 2023, met 26 hints (11:00 za – 12:00 zo). Bijlagen per hint zijn gehaald uit de Wayback-snapshot die het dichtst na de publicatie lag, omdat namen als `jotihunt2023-files/Alpha.pdf` per hint opnieuw werden gebruikt.
-- **Blind:** de links naar de uitleg zijn uit de hinttekst gehaald. De runs draaiden in een aparte testomgeving (kopie van `tools/` en de skill, eigen lege `hints/` en `verslagen/`), dus de positiecontrole zag alleen de 2023-antwoorden van eerdere runs en geen 2026-posities.
+- **Blind:** de links naar de uitleg zijn uit de hinttekst gehaald. De runs draaiden in een aparte testomgeving (kopie van de coach en de skill, met lege map voor hints en verslagen), dus de positiecontrole zag alleen de 2023-antwoorden van eerdere runs en geen 2026-posities.
 - **Draaien:** `solver.py --dry-run --parallel`, in publicatievolgorde, 3 tegelijk, maximaal 30 minuten per hint.
 - **Lekcontrole:** één run (045) probeerde de oplossingspagina op te halen. Dat gaf een 404 in de Wayback Machine en de 2026-site op jotihunt.nl, dus er is niets gelekt. Andere webverzoeken waren bijlagen die in het archief ontbraken; die haalde de coach zelf alsnog op van de CDN of uit de Wayback Machine.
 - **Beperking:** van 2023 zijn maar drie uitlegpagina's gearchiveerd (72, 81, 82). Hard gecontroleerd zijn die drie, plus hint 52, waar het coördinaat letterlijk in de docx van de organisatie staat. Voor de rest geldt alleen: is de lezing eenduidig en past de positie in de route van het team.
@@ -58,6 +60,6 @@ Tijd = duur van de volledige run (richting, stappen en antwoord), niet de tijd t
 
 1. **Patroonherkenning werkt ook op een onbekende editie.** De meeste typen kwamen niet uit de skill maar uit algemene kennis plus de titel. Waar het hard te controleren was (22 teamantwoorden), klopte op één afrondingsrandgeval na alles. Voor de overige hints is dat niet te bewijzen, omdat de uitleg niet gearchiveerd is.
 2. **Het systeem helpt zichzelf aan ontbrekend materiaal:** bijlagen van de CDN en uit de Wayback Machine, lotpagina's op NumisBids, een Minecraft-wereld uitlezen. Maar niet consequent: dezelfde wereld was voor run 44 "niet beschikbaar" en voor run 52 wel. Regel: eerst de CDN proberen, dan de Wayback Machine, en pas daarna "ontbreekt" concluderen.
-3. **Er zit nog 2026-kennis in de prompt.** `COACH_REGELS` in `tools/solver.py` zegt "Alpha zit vaak rond X 1500"; in 2023 liet de coach zich daar even door afleiden ("Alpha zit bij Doornspijk, niet rond X 1500"). Dat soort editiespecifieke feiten hoort in de skill (per editie), niet in de vaste prompt.
+3. **Er zit nog 2026-kennis in de prompt.** De vaste prompt van de coach (niet in deze repo) zei "Alpha zit vaak rond X 1500"; in 2023 liet de coach zich daar even door afleiden ("Alpha zit bij Doornspijk, niet rond X 1500"). Dat soort editiespecifieke feiten hoort in de skill (per editie), niet in de vaste prompt.
 4. **Geen tijdsbudget per hint.** Drie runs duurden 25–30+ minuten (hangende Overpass-API, eindeloos oleaat passen, combinaties proberen). Een budget van ~15 minuten, met daarna "post wat je hebt en stop of ga in de achtergrond verder", zou de 20-minutengrens beschermen. Bij een time-out bleef ook een `claude`-proces draaien (de solver start ze in een eigen procesgroep), dus de solver moet zijn kinderen zelf opruimen.
 5. **RD-afronding:** omrekenen in het hoofd gaf bij 82 1580 in plaats van 1581 (het vakje lag 0,3 m van de grens). Altijd `jh.py wgs2rd` gebruiken en randgevallen melden.

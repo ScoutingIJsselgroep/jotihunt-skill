@@ -1,5 +1,7 @@
 # Testresultaten Jotihunt 2024 (LEGO)
 
+> **Let op: dit is de beoordeling van de AI zelf, niet de officiële score.** Antwoorden die hier goed heten, zijn achteraf als geloofwaardig bestempeld en niet allemaal echt goed. Ter vergelijking: in 2026 haalde ons team 128 punten voor de hints, terwijl de AI-evaluatie van dat jaar op 154 goede teamantwoorden uitkomt.
+
 Bron: Wayback Machine-snapshots van jotihunt.nl (nov 2024), 28 hints, 26 uitlegpagina's. Hints eerst zelf opgelost, daarna vergeleken met de "Uitleg" van de organisatie. Antwoorden in RD-hintvorm (`XXXX YYYY`, 100 m) tenzij anders vermeld.
 
 ## Opgelost met antwoord

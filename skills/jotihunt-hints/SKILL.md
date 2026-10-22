@@ -158,7 +158,7 @@ Kennisbasis voor de uur-hints van de Jotihunt (jaarlijkse vossenjacht van Scouti
 | Ik Bell je zomaar even op (zo 10:00) | Cijfers op een telefoontoetsenbord | **Jump the five**, maar de makers lieten 5 en 0 staan (strikt 5↔0 gaf een onmogelijk coördinaat) | 8 goed |
 | De eenhoorn van de Hooglanden (zo 11:05) | Lint met Latijnse woorden | Latijnse telwoorden, DECEM = 0 (geen uitleg gepubliceerd) | 8 goed |
 
-Patroon 2026 (22 hints met antwoord, 154 van 168 teamantwoorden goed; de 13 fouten kwamen uit een gemiste UPDATE, een niet opgehaalde bronlijst, een net verkeerde meetregel en een zelfbedachte 6/9-regel): weinig klassieke geocache-codetabellen, wel **zelfbedachte systemen die je uit het thema moet afleiden** (Burgers' Zoo, kaasrol-klok, fantasiealfabet) en veel **media** (video, docx). De "snelle check" van de coach (eerste cijfer 1/2, vijfde cijfer 4, vergelijk met vorige positie) was telkens de sleutel om een zelfbedacht systeem te bevestigen.
+Patroon 2026 (22 hints met antwoord, volgens de eigen AI-evaluatie 154 van 168 teamantwoorden goed, maar het team haalde 128 hintpunten, dus lees dat als bovengrens; de 13 fouten kwamen uit een gemiste UPDATE, een niet opgehaalde bronlijst, een net verkeerde meetregel en een zelfbedachte 6/9-regel): weinig klassieke geocache-codetabellen, wel **zelfbedachte systemen die je uit het thema moet afleiden** (Burgers' Zoo, kaasrol-klok, fantasiealfabet) en veel **media** (video, docx). De "snelle check" van de coach (eerste cijfer 1/2, vijfde cijfer 4, vergelijk met vorige positie) was telkens de sleutel om een zelfbedacht systeem te bevestigen.
 
 Terugkerende **basisvaardigheden** (ook voor andere edities): Caesar/ROT, letterwaarde (A=1…Z=26), stapeltellen, binair, 7-segment, Kenny code, morse, braille en varianten, fantasy-alfabetten (geocachen.be heeft er ~140), telwoorden in andere talen, anagrammen, projecties, what3words, postcodes, filmjaren, trivia-tellen in video/audio, zoek-de-verschillen, stereogrammen, wachtwoord-beveiligde bestanden.
 
@@ -301,11 +301,11 @@ Alleen 72, 81, 82 (officiële uitleg) en 52 (docx opent) zijn hard gecontroleerd
 
 ---
 
-## 7. Praktische tooling (lokaal aanwezig op deze Mac)
+## 7. Praktische tooling (optioneel; check wat er lokaal is)
 
-- Python 3.12 met **PIL, numpy, cv2** (beelddiff, kleurtelling, stereogram-shift), geen tesseract (OCR: lees de afbeelding gewoon zelf met de Read-tool).
-- **Spraak naar tekst (lokaal Whisper)**: `HF_HUB_OFFLINE=1 python3 -c "from transformers import pipeline; p=pipeline('automatic-speech-recognition', model='openai/whisper-large-v3-turbo'); print(p('fragment.wav')['text'])"`. Audio uit video eerst met `ffmpeg -i v.mp4 -ac 1 -ar 16000 a.wav`. Transcribeer eerst vrij; geef pas daarna een prompt ("Twee letters: G R."). Losse letternamen blijven onbetrouwbaar, dus luister twijfelgevallen na. De `whisper`-module zelf is niet geïnstalleerd.
-- **ffmpeg** (audio/video knippen, frames, `-af silencedetect` om herhalingen te tellen), **magick/convert**, **sips** (snel verkleinen), **exiftool**.
+- De meeste `jh.py`-commando's hebben alleen Python 3 nodig. Beeldcommando's (`imgdiff`, `verschillen`, `symbolen`) willen **Pillow, numpy, scipy, opencv-python**; `transcribeer` wil **transformers, torch** en **ffmpeg**. Ontbreekt iets, meld dat en werk anders verder. Geen OCR nodig: lees de afbeelding zelf met de Read-tool.
+- **Spraak naar tekst (lokaal Whisper)**: `HF_HUB_OFFLINE=1 python3 -c "from transformers import pipeline; p=pipeline('automatic-speech-recognition', model='openai/whisper-large-v3-turbo'); print(p('fragment.wav')['text'])"`. Audio uit video eerst met `ffmpeg -i v.mp4 -ac 1 -ar 16000 a.wav`. Transcribeer eerst vrij; geef pas daarna een prompt ("Twee letters: G R."). Losse letternamen blijven onbetrouwbaar, dus luister twijfelgevallen na. Het model moet één keer gedownload zijn (`HF_HUB_OFFLINE=0` bij de eerste run); daarna werkt het offline.
+- Handig als ze er zijn: **ffmpeg** (audio/video knippen, frames, `-af silencedetect` om herhalingen te tellen), **magick/convert**, **sips** (macOS, snel verkleinen), **exiftool**.
 - `scripts/toollinks.json`: sleutels → naam + URL van online tools (geocachen-tabellen, dCode, what3words, PDOK, Tengwar, Gaelic, tartan…).
 - `scripts/jh.py` (naast deze SKILL.md): `rd2wgs`, `wgs2rd`, `projectie`, `kenny`, `seg7`, `caesar`, `letterwaarde`, `stapeltel`, `binair`, `imgdiff`, `verschillen`, `symbolen`, `anagram`. Voorbeelden:
   ```bash
@@ -318,7 +318,7 @@ Alleen 72, 81, 82 (officiële uitleg) en 52 (docx opent) zijn hard gecontroleerd
   python3 scripts/jh.py symbolen --vak 190,455,670,1095 --uit sym/ Alpha.png Bravo.png …   # symboolraster → klassen A/B/… per rij en kolom
   python3 scripts/jh.py rd2wgs 1883 4407
   ```
-- Afbeeldingen groter dan ~2000 px eerst verkleinen (`sips -Z 1600 in.png --out klein.png`) voordat je ze bekijkt; voor fijne symbolen juist **uitsnijden en vergroten** (`magick in.png -crop WxH+X+Y +repage -resize 300% uit.png`).
+- Afbeeldingen groter dan ~2000 px eerst verkleinen (`sips -Z 1600 in.png --out klein.png` of `magick in.png -resize 1600x1600 klein.png`) voordat je ze bekijkt; voor fijne symbolen juist **uitsnijden en vergroten** (`magick in.png -crop WxH+X+Y +repage -resize 300% uit.png`).
 - Zoekbronnen: Wikipedia (NL én EN), tolkiengateway.net / lotr.fandom.com (thema-wiki), nl.scoutwiki.org/Jotihunt (eerdere thema's), IMDb, what3words.com, 9292.nl, ns.nl, pdok.nl (RD-coördinaten op kaart: `https://www.pdok.nl/viewer`), geocachen.be, dcode.fr, anagram-solvers (bv. wordsmith.org/anagram, of eigen script met woordenlijst).
 
 ---

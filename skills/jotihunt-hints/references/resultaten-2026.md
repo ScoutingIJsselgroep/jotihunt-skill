@@ -1,5 +1,7 @@
 # Resultaten van de coach, editie 2026 (Brave / Schotland)
 
+> **Let op: dit is de beoordeling van de AI zelf, niet de officiële score.** "Geverifieerd" en "waarschijnlijk goed" zijn achteraf vastgesteld door agents die de bijlagen opnieuw uitwerkten met de officiële methode; de organisatie publiceert zelden coördinaten. Niet alles wat hier goed heet, was echt goed. Ter vergelijking: ons team haalde in 2026 **128 punten voor de hints**, terwijl deze evaluatie op 154 goede teamantwoorden uitkomt. Lees de cijfers als bovengrens.
+
 Na afloop (19 oktober 2026) heeft de organisatie per hint een uitleg gepubliceerd op `jotihunt.nl/solution/<id>`. Die uitleg geeft bijna altijd alleen de **methode**, zelden de coördinaten. Daarom is elk antwoord van de coach zo beoordeeld:
 
 - **geverifieerd goed**: bevestigd door een officiële afbeelding of bestand, of door het wachtwoord dat de docx opent, of zelf herberekend met een officieel genoemde bron (Burgers-wiki, Playfair-sleutel, alfabet.png);
